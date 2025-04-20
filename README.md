@@ -182,3 +182,6 @@ Potential improvements:
 - Support for object versioning (currently overriding the if request comes for same object)
 - Authentication and authorization
 - Adding persistent volume and db, so that restarts of minio nodes and gateway server doesnot lose that data
+
+Note: For production grade code I would add more UT for internal functions and Add Makefile , add targets inside Makefile to run those tests, lints, build etc.
+(But due to time constraint it is not there in current implementation)
