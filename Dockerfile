@@ -1,9 +1,25 @@
-FROM golang:1.15
-WORKDIR /mnt/homework
-COPY . .
-RUN go build
+FROM golang:1.23-alpine
 
-# Docker is used as a base image so you can easily start playing around in the container using the Docker command line client.
-FROM docker
-COPY --from=0 /mnt/homework/homework-object-storage /usr/local/bin/homework-object-storage
-RUN apk add bash curl
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+RUN apk add --no-cache git
+
+# Copy all files into the container
+ADD . .
+
+# Display contents for debugging (optional)
+RUN ls -la
+
+# Download Go module dependencies
+RUN go mod tidy
+
+# Build the binary
+RUN go build -v -o minio-storage-plugin ./cmd/main.go
+
+# Confirm the binary is built and is executable
+RUN ls -la minio-storage-plugin && chmod +x minio-storage-plugin
+
+# Set the entrypoint
+CMD ["./minio-storage-plugin"]
