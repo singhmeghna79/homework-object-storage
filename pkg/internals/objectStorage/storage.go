@@ -23,9 +23,9 @@ type ObjectStorage interface {
 type objectStorageFactory struct {
 }
 
-// StorageGeneric shall be a generic implementation of the Registry connection class
-// There are some registries which shall use this common method for getting token for
-// connection to a registry and testing the same
+// StorageGeneric shall be a generic implementation of the object storage interface
+// There can be some object storage which shall use this common method for storing and retrieval
+// of objects
 type StorageGeneric struct {
 }
 
